@@ -29,6 +29,7 @@
 #define CLIENT_CMD_DISABLE_INF_EID       16
 #define CLIENT_DISABLE_INF_EID           17
 #define CLIENT_DISABLE_ERR_EID           18
+#define CLIENT_PING_SERVER_EID           19
 
 /* Device specific command event IDs */
 #define CLIENT_CMD_CONFIG_INF_EID        20

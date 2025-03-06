@@ -23,7 +23,7 @@
     #define CLIENT_CFG_BAUDRATE_HZ      115200
     #define CLIENT_CFG_MS_TIMEOUT       50            /* Max 255 */
     /* Note: Debug flag disabled (commented out) by default */
-    //#define CLIENT_CFG_DEBUG
+    #define CLIENT_CFG_DEBUG
 #endif
 
 #endif /* _CLIENT_PLATFORM_CFG_H_ */

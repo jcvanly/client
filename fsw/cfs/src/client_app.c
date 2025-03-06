@@ -336,6 +336,14 @@ void CLIENT_ProcessGroundCommand(void)
             }
             break;
 
+        case CLIENT_PING_SERVER_CC:
+            if (CLIENT_VerifyCmdLength(CLIENT_AppData.MsgPtr, sizeof(CLIENT_NoArgs_cmd_t)) == OS_SUCCESS)
+            {
+                CFE_EVS_SendEvent(CLIENT_PING_SERVER_EID, CFE_EVS_EventType_INFORMATION,
+                                "CLIENT: Ping Server Command Case");
+            }
+            break;
+
         /*
         ** Invalid Command Codes
         */

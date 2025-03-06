@@ -22,6 +22,7 @@
 #define CLIENT_ENABLE_CC               2
 #define CLIENT_DISABLE_CC              3
 #define CLIENT_CONFIG_CC               4
+#define CLIENT_PING_SERVER_CC          5
 
 
 /* 
