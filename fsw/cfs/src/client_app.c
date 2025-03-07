@@ -341,6 +341,9 @@ void CLIENT_ProcessGroundCommand(void)
             {
                 CFE_EVS_SendEvent(CLIENT_PING_SERVER_EID, CFE_EVS_EventType_INFORMATION,
                                 "CLIENT: Ping Server Command Case");
+
+                CLIENT_SendPingRequest();
+                
             }
             break;
 
@@ -581,3 +584,17 @@ int32 CLIENT_VerifyCmdLength(CFE_MSG_Message_t * msg, uint16 expected_length)
     }
     return status;
 } 
+
+
+void CLIENT_SendPingRequest(void)
+{
+    CLIENT_NoArgs_cmd_t PingMsg;
+
+    /* Initialize the message */
+    CFE_MSG_Init(CFE_MSG_PTR(PingMsg.CmdHeader),
+                 CFE_SB_ValueToMsgId(CLIENT_PING_SERVER_REQ_MID),
+                 sizeof(CLIENT_NoArgs_cmd_t));
+
+    /* Send the message */
+    CFE_SB_TransmitMsg((CFE_MSG_Message_t *)&PingMsg, true);
+}

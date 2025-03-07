@@ -96,5 +96,6 @@ void  CLIENT_ResetCounters(void);
 void  CLIENT_Enable(void);
 void  CLIENT_Disable(void);
 int32 CLIENT_VerifyCmdLength(CFE_MSG_Message_t * msg, uint16 expected_length);
+void CLIENT_SendPingRequest(void);
 
 #endif /* _CLIENT_APP_H_ */
