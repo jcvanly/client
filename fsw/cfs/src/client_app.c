@@ -148,6 +148,16 @@ int32 CLIENT_AppInit(void)
         return status;
     }
 
+    status = CFE_SB_Subscribe(CFE_SB_ValueToMsgId(SERVER_PING_RESP_MID), CLIENT_AppData.CmdPipe);
+    if (status != CFE_SUCCESS)
+    {
+        CFE_EVS_SendEvent(CLIENT_SUB_PING_RESP_ERR_EID, CFE_EVS_EventType_ERROR,
+            "CLIENT: Error subscribing to Server Ping Response, MID=0x%04X, RC=0x%08X",
+            SERVER_PING_RESP_MID, (unsigned int)status);
+        return status;
+    }
+
+
     /*
     ** TODO: Subscribe to any other messages here
     */
@@ -228,6 +238,11 @@ void CLIENT_ProcessCommandPacket(void)
         case CLIENT_REQ_HK_MID:
             CLIENT_ProcessTelemetryRequest();
             break;
+        
+        case SERVER_PING_RESP_MID:
+            CLIENT_HandlePingResponse();
+            break;
+        
 
         /*
         ** All other invalid messages that this app doesn't recognize, 
@@ -343,7 +358,7 @@ void CLIENT_ProcessGroundCommand(void)
                                 "CLIENT: Ping Server Command Case");
 
                 CLIENT_SendPingRequest();
-                
+
             }
             break;
 
@@ -597,4 +612,14 @@ void CLIENT_SendPingRequest(void)
 
     /* Send the message */
     CFE_SB_TransmitMsg((CFE_MSG_Message_t *)&PingMsg, true);
+
+    CFE_EVS_SendEvent(CLIENT_PING_SERVER_EID, CFE_EVS_EventType_INFORMATION,
+                        "CLIENT: Sent ping request to server, status");
+}
+
+
+void CLIENT_HandlePingResponse(void)
+{
+    CFE_EVS_SendEvent(CLIENT_PING_RESP_EID, CFE_EVS_EventType_INFORMATION,
+                      "CLIENT: Received Ping Response from Server.");
 }
