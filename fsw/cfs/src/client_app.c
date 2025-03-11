@@ -355,7 +355,7 @@ void CLIENT_ProcessGroundCommand(void)
             if (CLIENT_VerifyCmdLength(CLIENT_AppData.MsgPtr, sizeof(CLIENT_NoArgs_cmd_t)) == OS_SUCCESS)
             {
                 CFE_EVS_SendEvent(CLIENT_PING_SERVER_EID, CFE_EVS_EventType_INFORMATION,
-                                "CLIENT: Ping Server Command Case");
+                                "CLIENT: Ping Server Command Case.");
 
                 CLIENT_SendPingRequest();
 
@@ -614,7 +614,7 @@ void CLIENT_SendPingRequest(void)
     CFE_SB_TransmitMsg((CFE_MSG_Message_t *)&PingMsg, true);
 
     CFE_EVS_SendEvent(CLIENT_PING_SERVER_EID, CFE_EVS_EventType_INFORMATION,
-                        "CLIENT: Sent ping request to server, status");
+                        "CLIENT: Sent ping request to server.");
 }
 
 
