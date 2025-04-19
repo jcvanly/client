@@ -23,6 +23,8 @@
 #define CLIENT_DISABLE_CC              3
 #define CLIENT_CONFIG_CC               4
 #define CLIENT_PING_SERVER_CC          5
+#define CLIENT_TOGGLE_EXFIL_CC         6
+
 
 
 /* 
@@ -42,6 +44,13 @@ typedef struct
     CFE_MSG_CommandHeader_t CmdHeader;
 
 } CLIENT_NoArgs_cmd_t;
+
+typedef struct
+{
+    CFE_MSG_CommandHeader_t CmdHeader;
+    uint8_t EnableExfil;
+
+} __attribute__((packed)) CLIENT_ToggleExfil_cmd_t;
 
 
 /*

@@ -113,6 +113,10 @@
           <xtce:IntegerDataEncoding sizeInBits="32" encoding="unsigned"/>
           <xtce:ValidRange minInclusive="0" maxInclusive="4294967295"/>
         </xtce:IntegerArgumentType>
+        <xtce:IntegerArgumentType name="EXFIL_TOGGLE_Type" initialValue="0" shortDescription="Toggle exfiltration (0=off, 1=on)" signed="false">
+          <xtce:IntegerDataEncoding sizeInBits="8" encoding="unsigned"/>
+          <xtce:ValidRange minInclusive="0" maxInclusive="1"/>
+        </xtce:IntegerArgumentType>
       </xtce:ArgumentTypeSet>
       <xtce:MetaCommandSet>
         <xtce:MetaCommand name="CLIENT_REQ_DATA">
@@ -201,6 +205,22 @@
           <xtce:ArgumentList/>
           <xtce:CommandContainer name="CLIENT_CLIENT_NOOP_CC_CommandContainer">
             <xtce:EntryList/>
+          </xtce:CommandContainer>
+        </xtce:MetaCommand>
+        <xtce:MetaCommand name="CLIENT_TOGGLE_EXFIL">
+          <xtce:BaseMetaCommand metaCommandRef="/CCSDS/CCSDS_TC">
+            <xtce:ArgumentAssignmentList>
+              <xtce:ArgumentAssignment argumentName="CCSDS_STREAMID" argumentValue="6395"/> <!-- 0x18F3 -->
+              <xtce:ArgumentAssignment argumentName="CCSDS_FC" argumentValue="6"/>         <!-- CLIENT_TOGGLE_EXFIL_CC -->
+            </xtce:ArgumentAssignmentList>
+          </xtce:BaseMetaCommand>
+          <xtce:ArgumentList>
+            <xtce:Argument name="EnableExfil" argumentTypeRef="EXFIL_TOGGLE_Type"/>
+          </xtce:ArgumentList>
+          <xtce:CommandContainer name="CLIENT_TOGGLE_EXFIL_CommandContainer">
+            <xtce:EntryList>
+              <xtce:ArgumentRefEntry argumentRef="EnableExfil"/>
+            </xtce:EntryList>
           </xtce:CommandContainer>
         </xtce:MetaCommand>
       </xtce:MetaCommandSet>

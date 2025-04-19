@@ -361,6 +361,26 @@ void CLIENT_ProcessGroundCommand(void)
 
             }
             break;
+        
+        case CLIENT_TOGGLE_EXFIL_CC:
+            if (CLIENT_VerifyCmdLength(CLIENT_AppData.MsgPtr, sizeof(CLIENT_ToggleExfil_cmd_t)) == OS_SUCCESS)
+            {
+                uint8_t toggle = ((CLIENT_ToggleExfil_cmd_t*)CLIENT_AppData.MsgPtr)->EnableExfil;
+
+                CFE_EVS_SendEvent(CLIENT_CMD_EXFIL_INF_EID, CFE_EVS_EventType_INFORMATION,
+                    "CLIENT: Toggle Exfiltration command received: %u", toggle);
+
+                // Send message to server
+                CLIENT_ToggleExfil_cmd_t msg;
+                
+                CFE_MSG_Init(CFE_MSG_PTR(msg.CmdHeader),
+                            CFE_SB_ValueToMsgId(CLIENT_TOGGLE_EXFIL_MID),
+                            sizeof(CLIENT_ToggleExfil_cmd_t));
+                msg.EnableExfil = toggle;
+                CFE_SB_TransmitMsg((CFE_MSG_Message_t *)&msg, true);
+            }
+            break;
+
 
         /*
         ** Invalid Command Codes

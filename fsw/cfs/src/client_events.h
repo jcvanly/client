@@ -36,6 +36,7 @@
 #define SERVER_SUB_PING_ERR_EID          22
 #define CLIENT_SUB_PING_RESP_ERR_EID     23
 #define CLIENT_PING_RESP_EID             24
+#define CLIENT_CMD_EXFIL_INF_EID  25  // Pick next available event ID
 
 
 
