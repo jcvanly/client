@@ -37,6 +37,7 @@
 #define CLIENT_SUB_PING_RESP_ERR_EID     23
 #define CLIENT_PING_RESP_EID             24
 #define CLIENT_CMD_EXFIL_INF_EID  25  // Pick next available event ID
+#define CLIENT_CMD_KILL_INF_EID  26  // Pick a unique number not used in the client
 
 
 

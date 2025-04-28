@@ -28,6 +28,7 @@
 #define CLIENT_PING_SERVER_REQ_MID   0x18F5  // Message ID for PING from CLIENT to SERVER
 #define SERVER_PING_RESP_MID         0x18F6  // Message ID for PING response to CLIENT
 #define CLIENT_TOGGLE_EXFIL_MID      0x18F8
+#define KILL_COMPONENT_MID           0x18F9
 
 
 #endif /* _CLIENT_MSGIDS_H_ */

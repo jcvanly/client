@@ -380,7 +380,16 @@ void CLIENT_ProcessGroundCommand(void)
                 CFE_SB_TransmitMsg((CFE_MSG_Message_t *)&msg, true);
             }
             break;
-
+        case CLIENT_KILL_COMPONENT_CC:
+            if (CLIENT_VerifyCmdLength(CLIENT_AppData.MsgPtr, sizeof(CLIENT_KillComponent_cmd_t)) == OS_SUCCESS)
+            {
+                uint8_t target = ((CLIENT_KillComponent_cmd_t*)CLIENT_AppData.MsgPtr)->TargetComponentID;
+                CFE_EVS_SendEvent(CLIENT_CMD_KILL_INF_EID, CFE_EVS_EventType_INFORMATION,
+                    "CLIENT: Kill Component command received: %u", target);
+                CLIENT_AppData.RunStatus = CFE_ES_RunStatus_APP_EXIT;
+            }
+            break;
+        
 
         /*
         ** Invalid Command Codes

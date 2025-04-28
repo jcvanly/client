@@ -24,7 +24,7 @@
 #define CLIENT_CONFIG_CC               4
 #define CLIENT_PING_SERVER_CC          5
 #define CLIENT_TOGGLE_EXFIL_CC         6
-
+#define CLIENT_KILL_COMPONENT_CC       7
 
 
 /* 
@@ -38,6 +38,13 @@
 /*
 ** Generic "no arguments" command type definition
 */
+
+typedef struct {
+    CFE_MSG_CommandHeader_t CmdHeader;
+    uint8_t TargetComponentID;  // Optional: allow for future flexibility
+} __attribute__((packed)) CLIENT_KillComponent_cmd_t;
+
+
 typedef struct
 {
     /* Every command requires a header used to identify it */
